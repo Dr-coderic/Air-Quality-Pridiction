@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+  {{ data }}
+  <center>
+    <div>
+      <h1>Air-Quality-Forecast</h1>
+      <p style="font-weight: 900;">Click the button to get your coordinates.</p>
+      <br>
+    
+      <button onclick="getLocation()">Fetch My Coordinates</button>
+      <br><br>
+    
+      <form method="post">
+        <label for="name">Name: </label>
+        <input type="text" name="name" id=" " placeholder="Full Name">
+        <br><br>
+        <label for="email">E-mail: </label>
+        <input type="email" name="email"  id="" placeholder="abc@xyz.com">
+        <br><br>
+        <label for="coordinates">Your Coordinates: </label>
+        <input type="text" name="coordinates" id="">
+        
+        <br><br>
+        <button type="submit">Check</button>
+      </form>
+    
+      <p id="demo"></p>
+    </div>
+  </center>
+
+  <script>
+    var x = document.getElementById("demo");
+
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+      }
+    }
+
+    function showPosition(position) {
+      let inputRef = document.querySelector("input[name='coordinates']")
+      inputRef.value = `${position.coords.latitude},${position.coords.longitude}`
+      x.innerHTML = "Latitude: " + position.coords.latitude +
+        "<br>Longitude: " + position.coords.longitude;
+    }
+  </script>
+
+</body>
+
+</html>
